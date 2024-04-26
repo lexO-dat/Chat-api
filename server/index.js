@@ -10,6 +10,7 @@ const io = new socketserver(server, {
     }
 });
 
+
 io.on('connection', async (socket) => {
     const id = socket.id;
     console.log('A user connected');
@@ -33,6 +34,9 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
+app.get('/test', (req, res) => {
+    res.send('Test');
+});
 
 server.listen(5172, () => {
     console.log('Server is running on http://localhost:5172');
