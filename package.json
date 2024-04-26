@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "20.12.x"
+  },
   "scripts": {
-    "dev": "nodemon ./server/index.js --ignore frontend"
+    "dev": "node ./server/index.js"
   },
   "keywords": [],
   "author": "",
