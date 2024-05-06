@@ -15,20 +15,26 @@ io.on('connection', async (socket) => {
     const id = socket.id;
     console.log('A user connected');
 
-    
+    socket.join('general'); // Unirse a la sala general por defecto
 
-    socket.on('message', (msj) => {
-
-        socket.broadcast.emit('message', {
-            body: msj.body,
-            from: msj.user,
+    socket.on('message', (msg) => {
+        io.to(room).emit('message', {
+            body: msg.body,
+            from: msg.user,
         });
+    });
+
+    socket.on('joinRoom', (roomName) => {
+        socket.leaveAll(); // Salir de todas las salas actuales
+        socket.join(roomName); // Unirse a la nueva sala
+        console.log(`User joined room: ${roomName}`);
     });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
 });
+
 
 app.get('/', (req, res) => {
     res.send('Hello World');
